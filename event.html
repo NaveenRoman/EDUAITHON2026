@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Event Details — EduAIthon 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #00b4d8;
+            --accent-color: #ff007c;
+            --green-accent: #22c55e;
+            --text-color: #333;
+            --bg-light: #f0f2f5;
+            --bg-white: #ffffff;
+            --header-bg: #002244;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            background: var(--bg-light);
+            color: var(--text-color);
+        }
+
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            max-width: 1200px;
+        }
+
+        .section-wrapper {
+            padding: 60px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* Title Gradient Animation */
+        .gradient-text {
+            background: linear-gradient(90deg, #ffcc00, #00e0ff, #ff007c);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 6s infinite alternate ease-in-out;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        header {
+            background: var(--header-bg);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand a {
+            font-size: 1.9rem;
+            font-weight: 900;
+            text-decoration: none;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+            margin: 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        nav a.active { color: #ffd60a; }
+        nav a.active::after { width: 100%; }
+        nav a:hover { color: #ffd60a; transform: translateY(-2px); }
+        nav a::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* --- Timeline / Event Flow --- */
+        .timeline {
+            position: relative;
+            margin: 50px auto;
+            padding: 40px 0;
+            width: 100%;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background: linear-gradient(180deg, var(--secondary-color), var(--accent-color));
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        .timeline-container {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+        }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        
+        /* The pulsating circle marker */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            right: -14px;
+            background-color: var(--bg-white);
+            border: 4px solid var(--secondary-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: border-color 0.3s, background-color 0.3s, box-shadow 0.3s; /* Added transition */
+        }
+        
+        .timeline-container.right::after { left: -12px; }
+        
+        /* The main content card */
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--bg-white);
+            position: relative;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s ease; /* Enhanced transition */
+            cursor: pointer;
+        }
+        
+        /* Hover Effect on Timeline Container (The animation requested by the user) */
+        .timeline-container:hover .timeline-content {
+            transform: translateY(-5px); /* Lift slightly */
+            /* Light color/glow effect */
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15), 0 0 15px rgba(0, 180, 216, 0.6); 
+        }
+
+        .timeline-container:hover::after {
+            border-color: var(--accent-color); /* Change border color */
+            background-color: var(--accent-color); /* Change fill color */
+            animation: pulseGlow 1.5s infinite; /* Start the pulse animation */
+        }
+
+        /* Keyframes for the Pulsing Glow */
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(0, 180, 216, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 180, 216, 0); }
+        }
+        
+        .timeline-content h2 { margin-top: 0; color: var(--primary-color); }
+        .timeline-content p { color: #555; }
+        .timeline-content .date { font-weight: 600; color: var(--accent-color); margin-bottom: 10px; display: block; }
+        
+        .content-with-image {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .content-with-image p {
+            flex-grow: 1;
+            margin-bottom: 0; 
+            font-size: 0.95rem;
+        }
+
+        /* --- Other Styles (Agenda, Prizes, Footer) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: var(--bg-white);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary-color);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        /* === SCHEDULE-SPECIFIC STYLES === */
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color), #ffd60a);
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 4s infinite alternate ease-in-out; 
+        }
+
+        .schedule-time {
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-right: 10px;
+            flex-shrink: 0;
+        }
+        .schedule-item {
+            display: flex;
+            flex-wrap: wrap; 
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            align-items: flex-start;
+            cursor: pointer; 
+            transition: background-color 0.2s ease;
+        }
+        .schedule-item:hover {
+            background-color: #f9f9f9;
+            border-radius: 4px;
+        }
+        .schedule-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .schedule-item:first-child { padding-top: 0; }
+        .schedule-details {
+            flex-grow: 1;
+            flex-basis: calc(100% - 70px); 
+        }
+        .schedule-details strong {
+            display: block;
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        .schedule-details small {
+            color: #777;
+            font-size: 0.8em; 
+        }
+
+        /* INLINE DETAIL STYLES */
+        .inline-details {
+            flex-basis: 100%; 
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out, opacity 0.3s ease-in;
+            padding: 0; 
+            opacity: 0;
+            margin-top: 0;
+            border-radius: 6px;
+        }
+
+        .schedule-item.expanded {
+             background-color: #fcfcfc; 
+             border-radius: 4px;
+        }
+        
+        .schedule-item.expanded .inline-details {
+            max-height: 500px; 
+            padding: 15px;
+            opacity: 1;
+            margin-top: 10px;
+            background-color: #e6f7ff; 
+            border: 1px solid var(--secondary-color);
+        }
+
+        .inline-details p {
+            margin: 0;
+            font-size: 0.9em;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        /* ================================ */
+
+        .prize-card {
+            border-top: none; 
+            padding: 15px 25px;
+        }
+        
+        .prize-card-title {
+            color: var(--primary-color);
+            border-top: 4px solid var(--green-accent); 
+            padding-top: 15px;
+            margin-top: -15px; 
+            margin-bottom: 0; 
+            font-size: 1.4rem;
+            transition: color 0.3s;
+            cursor: default; 
+            display: block;
+        }
+        
+        .prize-card-title:hover {
+            color: var(--green-accent);
+        }
+
+        .prize-details-container {
+            padding-top: 5px; 
+        }
+
+        .prize-details-list {
+            display: flex; 
+            flex-wrap: wrap; 
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0 0;
+            gap: 10px; 
+            align-items: flex-start;
+        }
+
+        .prize-details-list li {
+            font-size: 0.9rem; 
+            background-color: #e6f9ed; 
+            color: var(--text-color);
+            padding: 8px 12px;
+            border-radius: 6px;
+            flex-basis: auto; 
+            white-space: nowrap; 
+            border: 1px solid var(--green-accent); 
+            font-weight: 500;
+            transition: transform 0.2s;
+        }
+
+        .prize-details-list li:hover {
+            transform: translateY(-2px);
+        }
+        
+        .prize-details-list strong {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+
+        .site-footer {
+            background: linear-gradient(90deg, #001b44, #002e66, #001b44);
+            color: white;
+            text-align: center;
+            padding: 25px 0;
+            margin-top: 60px;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            border-top: 3px solid transparent;
+            border-image: linear-gradient(90deg, var(--secondary-color), var(--accent-color), #ffd60a) 1;
+        }
+        .site-footer a { color: var(--secondary-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .site-footer a:hover { color: #ffd60a; text-decoration: underline; }
+
+        /* ACCORDION STYLES (for Objectives/Themes) */
+        .accordion-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            margin-bottom: 0;
+            font-size: 1.25rem;
+            color: var(--primary-color);
+            margin-top: 0; 
+            margin-bottom: 0;
+            border-bottom: 2px solid var(--secondary-color);
+            transition: color 0.3s;
+        }
+
+        .accordion-header:hover {
+            color: var(--accent-color);
+        }
+
+        .accordion-icon {
+            font-size: 1.5rem;
+            line-height: 1;
+            color: var(--accent-color);
+            transition: all 0.2s ease;
+            font-weight: 600;
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out;
+        }
+
+        .accordion-content ul:not(.prize-details-list) {
+            padding-left: 20px;
+            margin-top: 15px;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 768px) {
+          .timeline::after { left: 31px; }
+          .timeline-container { width: 100%; padding-left: 70px; padding-right: 25px; }
+          .timeline-container.right { left: 0%; }
+          .timeline-container::after { left: 18px; }
+          nav ul {
+              display: none; 
+          }
+          .container {
+              width: 95%;
+          }
+          .section-header h1 {
+              font-size: 2.2rem;
+          }
+          /* Responsive update for timeline image on mobile */
+          .content-with-image {
+              flex-direction: column;
+          }
+          .timeline-image {
+              width: 100%; 
+              height: auto;
+              max-height: 200px;
+              order: -1; 
+              margin-bottom: 10px;
+          }
+          .schedule-details {
+             /* On mobile, allow the details to use full width */
+             flex-basis: 100%; 
+             margin-top: 5px;
+          }
+          .schedule-time {
+            /* Push time to its own line for better stacking */
+            flex-basis: 100%;
+            margin-bottom: 5px;
+          }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+  <nav class="container nav">
+    <!-- Brand -->
+    <div class="brand">
+      <a class="gradient-text" href="index.html"><strong>EduAIthon</strong></a>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="menu-toggle" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <!-- Navigation Links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="event.html" class="active">Event</a></li>
+      <li><a href="registration.html">Registration</a></li>
+      <li><a href="help.html">Help Desk</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- ✅ JavaScript for Menu Toggle -->
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
+
+  menuToggle.addEventListener("click", () => {
+    menuToggle.classList.toggle("open");
+    navLinks.classList.toggle("show");
+  });
+
+  // Close menu when a link is clicked (on mobile)
+  navLinks.querySelectorAll("a").forEach(link => {
+    link.addEventListener("click", () => {
+      menuToggle.classList.remove("open");
+      navLinks.classList.remove("show");
+    });
+  });
+</script>
+
+<!-- ✅ CSS -->
+<style>
+  /* --- Basic Layout --- */
+  header {
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
+
+  .container.nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .brand a {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+    background: linear-gradient(90deg, #22c55e, #9333ea, #06b6d4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* --- Nav Links --- */
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .nav-links li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    color: #22c55e;
+  }
+
+  /* --- Hamburger Icon --- */
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    width: 28px;
+    height: 22px;
+    justify-content: space-between;
+  }
+
+  .menu-toggle span {
+    display: block;
+    height: 3px;
+    width: 100%;
+    background: #333;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  /* --- Hamburger Animation --- */
+  .menu-toggle.open span:nth-child(1) {
+    transform: rotate(45deg) translateY(8px);
+  }
+  .menu-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .menu-toggle.open span:nth-child(3) {
+    transform: rotate(-45deg) translateY(-8px);
+  }
+
+  /* --- Mobile Menu --- */
+  @media (max-width: 768px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: #fff;
+      padding: 1.5rem 0;
+      text-align: center;
+      display: none;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+
+    .nav-links.show {
+      display: flex;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  }
+</style>
+
+
+    <main>
+        <!-- Futuristic Curved Animated Timeline -->
+<div class="section-wrapper" id="timeline">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="gradient-text">Event Details Timeline</h1>
+      <p>The journey from ideation to innovation, marked by glittering milestones.</p>
+    </div>
+
+    <div class="timeline">
+      <!-- Curved SVG Path -->
+      <svg class="timeline-svg" width="0" height="0" viewBox="0 0 800 700">
+        <path id="timelinePath" d="M100,50 C400,150 400,250 100,350 C400,450 400,550 100,650" fill="transparent"/>
+      </svg>
+
+      <!-- Glowing line using same path -->
+      <svg class="timeline-svg-line" viewBox="0 0 800 700">
+        <path d="M100,50 C400,150 400,250 100,350 C400,450 400,550 100,650" 
+              stroke="url(#gradientLine)" stroke-width="6" fill="transparent" 
+              stroke-linecap="round" stroke-dasharray="10 20">
+        </path>
+        <defs>
+          <linearGradient id="gradientLine" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#00b4d8"/>
+            <stop offset="50%" stop-color="#ff007c"/>
+            <stop offset="100%" stop-color="#ffd60a"/>
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <!-- Moving Dots -->
+      <div class="moving-dot dot1"></div>
+      <div class="moving-dot dot2"></div>
+      <div class="moving-dot dot3"></div>
+
+      <!-- Timeline Event Cards -->
+      <div class="timeline-item item1">
+        <span class="date">Dec 2–4, 2025</span>
+        <h2>Pre-Event Workshops</h2>
+        <p>Introductory sessions on AI tools, design thinking, and immersive technologies.</p>
+      </div>
+
+      <div class="timeline-item item2">
+        <span class="date">Jan 8, 2026</span>
+        <h2>Launch & Ideation</h2>
+        <p>Team registration, empathy mapping, and initial mentor reviews.</p>
+      </div>
+
+      <div class="timeline-item item3">
+        <span class="date">Jan 9, 2026</span>
+        <h2>Development Sprint</h2>
+        <p>Prototype development, peer evaluations, and sustainability integration.</p>
+      </div>
+
+      <div class="timeline-item item4">
+        <span class="date">Jan 10, 2026</span>
+        <h2>Final Presentations & Awards</h2>
+        <p>Final presentations, awards ceremony, and networking opportunities.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.timeline {
+  position: relative;
+  margin: 50px 0;
+  height: 700px;
+}
+
+/* Moving Dots */
+.moving-dot {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  background: #ffb703;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  offset-path: path("M100,50 C400,150 400,250 100,350 C400,450 400,550 100,650");
+  offset-rotate: auto;
+}
+
+.dot1 { animation: moveDot 8s linear infinite; }
+.dot2 { animation: moveDot 12s linear infinite; animation-delay: 2s; }
+.dot3 { animation: moveDot 10s linear infinite; animation-delay: 4s; }
+
+@keyframes moveDot {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+/* Glowing animated line effect */
+.timeline-svg-line path {
+  stroke-dasharray: 10 20;
+  animation: dashMove 3s linear infinite;
+}
+
+@keyframes dashMove {
+  0% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 30; }
+}
+
+/* Timeline Event Cards */
+.timeline-item {
+  position: absolute;
+  width: 250px;
+  background: #ffffff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.date {
+  display: block;
+  font-weight: 600;
+  color: #0077b6;
+  margin-bottom: 5px;
+}
+
+/* Item positions along the curved path */
+.item1 { top: 50px; left: 60px; }
+.item2 { top: 230px; left: 420px; }
+.item3 { top: 380px; left: 60px; }
+.item4 { top: 550px; left: 420px; }
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffb703;
+  border: 4px solid #fff;
+  top: 20px;
+  left: -28px;
+}
+</style>
+
+<script>
+// Animate timeline cards on scroll
+const items = document.querySelectorAll('.timeline-item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.3 });
+items.forEach(item => observer.observe(item));
+</script>
+
+       
+
+        <!-- 3. Objectives & Themes (Interactive/Accordion) -->
+        <div class="section-wrapper">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="gradient-text">Objectives & Themes</h1>
+                    <p>Click to expand and view the detailed focus areas of the EduAIthon.</p>
+                </div>
+                <div class="grid" id="accordion-grid">
+                    <!-- Objectives Card (Accordion Item 1) -->
+                    <div class="card">
+                        <h3 class="accordion-header active" data-target="objectives-content">
+                            Objectives for Participants
+                            <span class="accordion-icon">-</span>
+                        </h3>
+                        <div class="accordion-content" id="objectives-content" style="max-height: 200px;">
+                            <ul>
+                                <li>Personalize learning with AI-driven tools.</li>
+                                <li>Develop inclusive and adaptive educational systems.</li>
+                                <li>Integrate sustainability into learning.</li>
+                                <li>Redefine teaching for the AI-driven era.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <!-- Core Themes Card (Accordion Item 2) -->
+                    <div class="card">
+                        <h3 class="accordion-header" data-target="themes-content">
+                            Core Themes
+                            <span class="accordion-icon">+</span>
+                        </h3>
+                        <div class="accordion-content" id="themes-content">
+                            <ul>
+                                <li>AI in Education</li>
+                                <li>Responsible AI</li>
+                                <li>Combating Fake Information</li>
+                                <li>AI to Foster Well-being</li>
+                                <li>Digital Humanities</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Judging Criteria Card (Accordion Item 3) -->
+                    <div class="card">
+                        <h3 class="accordion-header" data-target="judging-content">
+                            Judging Criteria
+                            <span class="accordion-icon">+</span>
+                        </h3>
+                        <div class="accordion-content" id="judging-content">
+                            <ul>
+                               <li><strong>Innovation & Creativity:</strong> Originality and uniqueness of the solution.</li>
+                               <li><strong>Sustainability Impact:</strong> Contribution to eco-friendly, lasting solutions.</li>
+                               <li><strong>AI Integration Depth:</strong> Effective use of advanced technologies.</li>
+                               <li><strong>Heutagogical Relevance:</strong> Support for self-directed learning.</li>
+                               <li><strong>Presentation Clarity:</strong> Quality of communication.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+         <!-- 3. Prizes & Recognition - UPDATED SECTION -->
+        <!-- This section has been completely changed to remove USD and match the brochure -->
+        <div class="section-wrapper">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="gradient-text">Prizes & Recognition</h1>
+                    <p>Awards from a total prize pool of ₹2,00,000.</p>
+                </div>
+                <div class="grid">
+                    <div class="card prize-card">
+                        <h3 class="prize-card-title">
+                            Total Prize Pool: ₹2,00,000
+                        </h3>
+                        <div class="prize-details-container" id="prize-grand">
+                            <ul class="prize-details-list">
+                                <li><strong>Recognition:</strong> All participants receive certificates.</li>
+                                <li><strong>Exposure:</strong> Showcase on an international platform (IASF).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card prize-card">
+                        <h3 class="prize-card-title">
+                            Award Categories
+                        </h3>
+                        <div class="prize-details-container" id="prize-categories">
+                            <ul class="prize-details-list">
+                                <li>Best use of AI/VR/AR</li>
+                                <li>Best Educational Model</li>
+                                <li>Best Innovative Idea</li>
+                                <li>Best Impact in Education</li>
+                                <li>Audience Choice Award</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 5. Hackathon Structure / Participation Info -->
+<div class="section-wrapper">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="gradient-text">Hackathon Structure & Participation</h1>
+      <p>Understand the structure, team format, and application flow for EduAIthon 2026.</p>
+    </div>
+    <div class="grid">
+      <div class="card" style="border-top-color:#0077b6;">
+        <h3><i class="fa-solid fa-users"></i> Team Composition</h3>
+        <p>Each team must include <strong>3 students + 1 faculty mentor</strong>. The mentor should teach the selected course module or chapter for the prototype.</p>
+      </div>
+      <div class="card" style="border-top-color:#00b4d8;">
+        <h3><i class="fa-solid fa-calendar-days"></i> Key Dates</h3>
+        <ul>
+          <li><strong>Call Opens:</strong> Nov 1, 2025</li>
+          <li><strong>Bootcamp:</strong> Dec 2025 (Online)</li>
+          <li><strong>Hackathon:</strong> Jan 8–10, 2026 @ GITAM University, Bangalore</li>
+          <li><strong>Final Presentations:</strong> Jan 10, 2026</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:#ff007c;">
+        <h3><i class="fa-solid fa-laptop-code"></i> Venue & Platform</h3>
+        <p>The on-site event will be held at <strong>GITAM University, Bangalore</strong>, as part of ICTIEE 2026. Teams will leverage AI tools such as <em>Eduaide.ai</em>, <em>Glide</em>, and <em>NagiESchool.ai</em>.</p>
+      </div>
+      <div class="card" style="border-top-color:#ffd60a;">
+        <h3><i class="fa-solid fa-envelope-open-text"></i> Registration</h3>
+        <p>Apply via the <strong>IUCEE website</strong> at <a href="https://www.iucee.org/hackathon2026" target="_blank">iucee.org/hackathon2026</a> before <strong>November 30, 2025</strong>.</p>
+        <p>For queries: <a href="mailto:hackathon@iucee.org">hackathon@iucee.org</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 6. Deliverables -->
+<div class="section-wrapper" style="background: var(--bg-white);">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="gradient-text">Hackathon Deliverables</h1>
+      <p>Each team will submit the following deliverables for evaluation:</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3><i class="fa-solid fa-heart"></i> Empathy Mapping</h3>
+        <p>Identify learner pain points and needs through detailed empathy mapping.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-lightbulb"></i> Ideation</h3>
+        <p>Conceptualize innovative learning experiences supported by AI tools.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-cogs"></i> Prototype</h3>
+        <p>Develop a functional prototype or digital demo demonstrating personalized learning.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-video"></i> Pitch & Presentation</h3>
+        <p>Create a <strong>5-min video pitch</strong> with a <strong>3-slide deck</strong> to showcase the solution.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-book"></i> Reflective Journal</h3>
+        <p>Submit a reflective journal detailing the design process, learning, and impact.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. Participant Benefits -->
+<div class="section-wrapper">
+  <div class="container">
+    <div class="section-header">
+      <h1 class="gradient-text">Participant Benefits</h1>
+      <p>By participating in EduAIthon 2026, teams gain transformative exposure and experience.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3><i class="fa-solid fa-brain"></i> Hands-on Learning</h3>
+        <p>Gain real-world experience with AI, AR/VR, and Digital Twin technologies.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-handshake-angle"></i> Mentorship</h3>
+        <p>Work with expert faculty and industry mentors for guidance and professional growth.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-trophy"></i> Recognition</h3>
+        <p>Top teams receive international recognition and showcase opportunities through IASF.</p>
+      </div>
+      <div class="card">
+        <h3><i class="fa-solid fa-users"></i> Collaboration</h3>
+        <p>Network with peers across disciplines and institutions to co-create future innovations.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll Animation -->
+<script>
+  const observerCards = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = 1;
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.2 });
+
+  document.querySelectorAll('.card').forEach(card => {
+    card.style.opacity = 0;
+    card.style.transform = 'translateY(30px)';
+    observerCards.observe(card);
+  });
+</script>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© IUCEE – EduAIthon 2026 | <a href="help.html">Contact</a> | <a href="#">Terms</a> | <a href="#">Privacy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Schedule Item Inline Expansion Logic ---
+            const scheduleItems = document.querySelectorAll('.schedule-item');
+
+            scheduleItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const isExpanded = item.classList.contains('expanded');
+                    const detailsContainer = item.querySelector('.inline-details');
+                    const detailsTextElement = item.querySelector('.inline-details-text');
+                    const fullDetailText = item.querySelector('strong').getAttribute('data-full-detail');
+
+                    // 1. Close all other expanded items
+                    scheduleItems.forEach(otherItem => {
+                        if (otherItem !== item && otherItem.classList.contains('expanded')) {
+                            otherItem.classList.remove('expanded');
+                            otherItem.querySelector('.inline-details').style.maxHeight = null;
+                        }
+                    });
+
+                    // 2. Toggle current item
+                    if (isExpanded) {
+                        // Collapse
+                        item.classList.remove('expanded');
+                        detailsContainer.style.maxHeight = null;
+                    } else {
+                        // Expand
+                        // Set the text content first
+                        detailsTextElement.textContent = fullDetailText;
+                        
+                        // Wait for a tiny moment (or next frame) to calculate scrollHeight correctly 
+                        // and apply the transition after content is rendered
+                        setTimeout(() => {
+                            item.classList.add('expanded');
+                            // Set max-height based on content height + some buffer
+                            detailsContainer.style.maxHeight = detailsTextElement.offsetHeight + 50 + "px";
+                        }, 10); 
+                    }
+                });
+            });
+
+            // --- Accordion Toggle Logic (ONLY for Objectives & Themes) ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                const targetId = header.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+                const icon = header.querySelector('.accordion-icon');
+
+                header.addEventListener('click', () => {
+                    // Toggle active class on the header
+                    header.classList.toggle('active');
+
+                    // Toggle the content visibility with animation
+                    if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                        // Collapse the content
+                        content.style.maxHeight = null;
+                        icon.textContent = '+'; // Change icon to Plus
+                    } else {
+                        // Expand the content
+                        // Set max-height to scroll height to enable smooth transition
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.textContent = '–'; // Change icon to Minus
+                    }
+                });
+
+                // Initialize the state
+                // This ensures the initial open state has the max-height set correctly and the icon is '-'
+                if (header.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                    icon.textContent = '–';
+                } else {
+                    // Ensure the initial closed state has the icon as '+'
+                    icon.textContent = '+';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

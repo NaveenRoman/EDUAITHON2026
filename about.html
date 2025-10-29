@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About — EduAIthon 2026</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="https://ictiee.org/ictiee2026/wp-content/uploads/2023/02/favicon-2.png" type="image/png">
+
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" />
+
+  <style>
+    :root {
+      --primary-color: #001730;
+      --secondary-color: #ffffff;
+      --background-color: #f6f8fa;
+      --accent-teal: #06b6d4;
+      --accent-gold: #facc15;
+      --accent-purple: #9333ea;
+      --text-color: #1c1c1c;
+      --light-text-color: #555;
+      --gradient-main: linear-gradient(90deg, #22c55e, #9333ea, #06b6d4);
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: var(--background-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      max-width: 1280px;
+    }
+
+    h1, h2, h3 {
+      font-weight: 700;
+      color: var(--primary-color);
+      line-height: 1.2;
+    }
+
+    p {
+      line-height: 1.75;
+      color: var(--light-text-color);
+    }
+
+    /* ===== Header ===== */
+    header {
+      background: var(--secondary-color);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+    }
+
+    nav a {
+      color: #1c1c1c;
+      font-weight: 600;
+      margin: 0 12px;
+      text-decoration: none;
+      transition: color 0.3s ease, transform 0.2s ease;
+      position: relative;
+    }
+
+    nav a:hover {
+      color: #22c55e;
+      transform: translateY(-2px);
+    }
+
+    nav a.active {
+      color: #22c55e;
+      font-weight: 700;
+    }
+
+    .gradient-text {
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 200% 100%;
+      animation: gradientMove 6s infinite alternate linear;
+    }
+
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+
+    /* ===== Mobile Menu ===== */
+    #menuToggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      cursor: pointer;
+    }
+
+    #menuToggle span {
+      display: block;
+      height: 3px;
+      background: #333;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    #menuToggle.open span:nth-child(1) {
+      transform: rotate(45deg) translateY(8px);
+    }
+    #menuToggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+    #menuToggle.open span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-8px);
+    }
+
+    #navLinks {
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: white;
+      text-align: center;
+      flex-direction: column;
+      gap: 12px;
+      padding: 15px 0;
+      display: none;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    #navLinks.show {
+      display: flex;
+      animation: fadeDown 0.3s ease forwards;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (min-width: 768px) {
+      #menuToggle {
+        display: none;
+      }
+      #navLinks {
+        position: static;
+        display: flex !important;
+        flex-direction: row;
+        box-shadow: none;
+        background: transparent;
+        gap: 24px;
+      }
+    }
+
+    /* ===== Sections ===== */
+    .section-wrapper {
+      padding: 90px 0;
+      width: 100%;
+    }
+
+    .alt-bg {
+      background: var(--secondary-color);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease;
+    }
+
+    .section-header.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-header h1 {
+      font-size: 2.6rem;
+      letter-spacing: -0.5px;
+    }
+
+    .section-header h1::after {
+      content: "";
+      display: block;
+      width: 100px;
+      height: 4px;
+      margin: 18px auto 0;
+      background: var(--accent-teal);
+      border-radius: 3px;
+    }
+
+    /* ===== Cards Grid ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 30px;
+    }
+
+    .info-card {
+      background: var(--secondary-color);
+      border-radius: 12px;
+      padding: 30px;
+      border-left: 6px solid var(--accent-teal);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
+
+    .info-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      border-left-color: var(--accent-gold);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .info-card.highlight {
+      border-left: 8px solid var(--accent-purple);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      color: var(--accent-teal);
+      margin-bottom: 10px;
+      transition: color 0.3s ease;
+    }
+
+    .info-card:hover .card-icon {
+      color: var(--accent-gold);
+    }
+
+    /* ===== Footer ===== */
+    .site-footer {
+      background: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 40px 0;
+      border-top: 4px solid var(--accent-teal);
+      margin-top: 60px;
+    }
+
+    .site-footer a {
+      color: var(--accent-gold);
+      text-decoration: none;
+    }
+
+    @media (min-width: 768px) {
+      .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .about-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== Header ===== -->
+  <header>
+    <nav class="container">
+      <a href="index.html" class="gradient-text text-2xl font-extrabold">EduAIthon 2026</a>
+
+      <div id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="active">About</a>
+        <a href="event.html">Event</a>
+        <a href="registration.html">Registration</a>
+        <a href="help.html">Help Desk</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===== Main ===== -->
+  <main>
+    <!-- Intro Section -->
+    <section class="section-wrapper alt-bg">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="gradient-text">Catalyzing the Future of Engineering Education</h1>
+          <p>EduAIthon 2026 — a national hackathon under IUCEE IASF 2026, empowering students to co-create AI-powered self-learning tools for higher education through innovation, collaboration, and creativity.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="info-card highlight">
+            <i class="fas fa-bullseye card-icon"></i>
+            <h3>Our Vision</h3>
+            <p>Empowering students globally to co-create sustainable, ethical, and AI-powered educational solutions that address real-world challenges and foster a new generation of engineering leaders.</p>
+          </div>
+
+          <div class="info-card highlight">
+            <i class="fas fa-tasks card-icon"></i>
+            <h3>Our Mission</h3>
+            <p>To establish an unparalleled interdisciplinary platform where students collaborate and innovate to design AI-driven self-learning modules, advancing ethical AI in education.</p>
+          </div>
+
+          <div class="info-card">
+            <i class="fas fa-building card-icon"></i>
+            <h3>About IUCEE</h3>
+            <p>The Indo Universal Collaboration for Engineering Education (<strong>IUCEE</strong>) is a global initiative enhancing the quality and relevance of engineering education through collaboration and innovation.</p>
+          </div>
+
+          <div class="info-card">
+            <i class="fas fa-users-gear card-icon"></i>
+            <h3>About IASF</h3>
+            <p>The <strong>IUCEE Annual Student Forum (IASF)</strong> provides a vibrant platform for students to showcase leadership, collaboration, and problem-solving skills in global educational contexts.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hackathon Structure -->
+    <section class="section-wrapper">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="gradient-text">Hackathon Structure</h1>
+          <p>A comprehensive framework designed to blend innovation, mentorship, and impact — ensuring that every participant experiences hands-on AI transformation.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="info-card"><i class="fas fa-users card-icon"></i>
+            <h3>Team Composition</h3>
+            <p>Each team consists of <strong>3 students + 1 faculty mentor</strong>. The faculty member teaches the chosen course module for the AI-powered prototype.</p>
+          </div>
+
+          <div class="info-card"><i class="fas fa-calendar-alt card-icon"></i>
+            <h3>Timeline</h3>
+            <p><strong>Call Opens:</strong> Nov 1, 2025<br>
+               <strong>Bootcamp:</strong> Dec 2025 (online)<br>
+               <strong>Hackathon:</strong> Jan 8–10, 2026 @ GITAM University, Bangalore<br>
+               <strong>Awards:</strong> Jan 10, 2026</p>
+          </div>
+
+          <div class="info-card"><i class="fas fa-book-open card-icon"></i>
+            <h3>Project Focus</h3>
+            <p>Teams design personalized learning modules for specific course chapters using tools like <strong>Eduaide.ai</strong>, <strong>Glide</strong>, and <strong>NagiESchool.ai</strong>.</p>
+          </div>
+
+          <div class="info-card"><i class="fas fa-laptop-code card-icon"></i>
+            <h3>Technology Stack</h3>
+            <p>Emphasis on <strong>AI, AR/VR, and Digital Twins</strong> to foster interactive and adaptive learning experiences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Deliverables -->
+    <section class="section-wrapper alt-bg">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="gradient-text">Deliverables & Outcomes</h1>
+          <p>Participants will build meaningful prototypes showcasing innovation, pedagogy, and personalization.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="info-card"><i class="fas fa-heart card-icon"></i><h3>Empathy Mapping</h3><p>Identify learner needs and challenges through detailed empathy mapping and persona creation.</p></div>
+          <div class="info-card"><i class="fas fa-lightbulb card-icon"></i><h3>Ideation</h3><p>Brainstorm and conceptualize effective AI learning strategies aligned with student needs.</p></div>
+          <div class="info-card"><i class="fas fa-cogs card-icon"></i><h3>Prototype Development</h3><p>Create an app, module, or digital tool that adapts to student pace and performance.</p></div>
+          <div class="info-card"><i class="fas fa-video card-icon"></i><h3>Pitch & Presentation</h3><p>Present a <strong>5-minute video pitch</strong> and <strong>3-slide deck</strong> demonstrating innovation and impact.</p></div>
+          <div class="info-card"><i class="fas fa-book card-icon"></i><h3>Reflective Journal</h3><p>Document your journey, learnings, and insights through a reflective journal submission.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Awards -->
+    <section class="section-wrapper">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="gradient-text">Awards & Recognition</h1>
+          <p>With a prize pool of ₹2,00,000, EduAIthon celebrates excellence in creativity, collaboration, and impact.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="info-card highlight"><i class="fas fa-award card-icon"></i><h3>Best AI-Driven Learning Tool</h3><p>Recognizing the most impactful AI-based personalized learning module.</p></div>
+          <div class="info-card"><i class="fas fa-crown card-icon"></i><h3>Most Innovative Design</h3><p>For groundbreaking approaches to educational problem-solving.</p></div>
+          <div class="info-card"><i class="fas fa-user-friends card-icon"></i><h3>Best Faculty–Student Collaboration</h3><p>Celebrating synergy between faculty mentorship and student innovation.</p></div>
+          <div class="info-card"><i class="fas fa-graduation-cap card-icon"></i><h3>Best Educational Model</h3><p>Rewarding pedagogically sound and scalable learning models.</p></div>
+          <div class="info-card"><i class="fas fa-users card-icon"></i><h3>Audience Choice Award</h3><p>Chosen by peers for creativity, engagement, and presentation excellence.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="section-wrapper alt-bg">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="gradient-text">Why Join EduAIthon?</h1>
+          <p>Beyond competition — an opportunity to innovate, connect, and grow in the global AI education ecosystem.</p>
+        </div>
+
+        <div class="about-grid">
+          <div class="info-card"><i class="fas fa-brain card-icon"></i><h3>Hands-on AI Experience</h3><p>Work with cutting-edge tools like AI, AR/VR, and digital twins.</p></div>
+          <div class="info-card"><i class="fas fa-network-wired card-icon"></i><h3>Mentorship & Networking</h3><p>Gain guidance from faculty and industry experts, and connect with innovators across India.</p></div>
+          <div class="info-card"><i class="fas fa-award card-icon"></i><h3>Global Recognition</h3><p>Showcase your prototype on an international platform during ICTIEE 2026.</p></div>
+          <div class="info-card"><i class="fas fa-lightbulb card-icon"></i><h3>Leadership & Creativity</h3><p>Develop leadership, creativity, and adaptive learning strategies for the future.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== Footer ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© IUCEE – EduAIthon 2026 | <a href="help.html">Contact</a> | <a href="#">Terms</a> | <a href="#">Privacy</a></p>
+    </div>
+  </footer>
+
+  <!-- ===== Scripts ===== -->
+  <script>
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById("menuToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    menuToggle.addEventListener("click", () => {
+      menuToggle.classList.toggle("open");
+      navLinks.classList.toggle("show");
+    });
+
+    // Close menu on link click (mobile)
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        if (window.innerWidth < 768) {
+          menuToggle.classList.remove("open");
+          navLinks.classList.remove("show");
+        }
+      });
+    });
+
+    // Scroll Animations
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.section-header, .info-card').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

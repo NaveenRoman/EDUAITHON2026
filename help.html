@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Help Desk — EduAIthon 2026</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    :root{
+      --bg-deep:#0e0e0e; --bg-card:#1c1c1c; --text-light:#f0f0f0; --text-secondary:#a0a0a0;
+      --gold-bright:#ffd700; --gold-dark:#b8860b; --border-dark:#3a3a3a; --cyan-bright:#00ffff;
+      --orange-bright:#ff6a00; --purple-bright:#8a2be2; --fuschia-bright:#ff00ff; --green-success:#32cd32;
+    }
+    body{font-family:'Inter',sans-serif;background:var(--bg-deep);color:var(--text-light);min-height:100vh;display:flex;flex-direction:column;}
+    @keyframes gold-shift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+    .gradient-text{background:linear-gradient(90deg,var(--gold-bright),var(--gold-dark),var(--gold-bright));background-size:600% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;font-family:'Poppins',sans-serif;font-weight:800;animation:gold-shift 8s linear infinite;}
+    .info-card{background:var(--bg-card);border:1px solid var(--border-dark);transition:transform .3s,box-shadow .3s;}
+    .info-card:hover{transform:translateY(-4px);box-shadow:0 8px 15px rgba(0,0,0,.4)}
+    .card-orange{border-left:6px solid var(--orange-bright)!important}
+    .card-purple{border-left:6px solid var(--purple-bright)!important}
+    .card-fuschia{border-left:6px solid var(--fuschia-bright)!important}
+    .contact-form-container{background:var(--bg-card);border:1px solid var(--border-dark);transition:transform .3s,box-shadow .5s,border-color .5s}
+    .contact-form-container:hover{transform:translateY(-6px);box-shadow:0 10px 30px rgba(0,0,0,.9),0 0 20px var(--cyan-bright);border-color:var(--cyan-bright)}
+    .form-input-field{background:var(--bg-deep);border:1px solid var(--border-dark);color:var(--text-light)}
+    .form-input-field:focus{border-color:var(--gold-bright)!important;box-shadow:0 0 0 1px var(--gold-bright)}
+    .btn-primary{background:var(--gold-dark);color:var(--bg-deep);transition:background .3s,transform .2s,box-shadow .3s;font-weight:700}
+    .btn-primary:hover{background:var(--gold-bright);transform:translateY(-2px);box-shadow:0 0 25px var(--gold-bright);color:#000}
+    .spinner{border:4px solid rgba(255,255,255,.15);border-top:4px solid var(--gold-bright);border-radius:50%;width:20px;height:20px;animation:spin 1s linear infinite;display:inline-block}
+    @keyframes spin{100%{transform:rotate(360deg)}}
+
+    /* Modal / notifications */
+    #success-modal,#error-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;align-items:center;justify-content:center;padding:1rem}
+    .modal-box{background:linear-gradient(135deg,#1a1a1a,#292929);border:2px solid var(--gold-bright);padding:1.5rem 2rem;border-radius:1rem;text-align:center;box-shadow:0 0 25px rgba(255,215,0,.12)}
+    .modal-title{font-weight:800;color:var(--gold-bright);font-size:1.25rem;margin-top:.5rem}
+    .modal-text{color:var(--text-secondary);margin-top:.5rem}
+    .close-btn{margin-top:1rem;padding:.5rem .75rem;border-radius:.5rem;background:transparent;border:1px solid var(--border-dark);color:var(--text-light);cursor:pointer}
+    .inline-error{color:#ff8a8a;font-size:.95rem;margin-top:.5rem}
+  </style>
+</head>
+<body class="antialiased flex flex-col min-h-screen">
+  <header class="sticky top-0 z-20 bg-bg-deep shadow-lg border-b border-border-dark">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+      <a class="gradient-text text-3xl font-extrabold" href="#">EduAIthon</a>
+      <ul class="flex space-x-6 text-sm font-medium hidden md:flex">
+        <li><a href="index.html" class="text-text-light hover:text-gold-bright">Home</a></li>
+        <li><a href="about.html" class="text-text-light hover:text-gold-bright">About</a></li>
+        <li><a href="event.html" class="text-text-light hover:text-gold-bright">Event</a></li>
+        <li><a href="register.html" class="text-text-light hover:text-gold-bright">Registration</a></li>
+        <li><a href="help.html" class="text-gold-bright border-b-2 border-gold-bright">Help Desk</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="flex-grow">
+    <div class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h1 class="gradient-text text-5xl md:text-7xl font-black mb-4 tracking-tight">Get in Touch</h1>
+          <p class="text-xl text-text-secondary font-semibold max-w-3xl mx-auto">We're here to help. Reach out with your questions regarding registration, themes, or event logistics.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div class="lg:col-span-1 space-y-8">
+            <h2 class="text-3xl font-bold mb-4 gradient-text">Contact Details</h2>
+
+            <div class="info-card card-orange p-6 rounded-xl shadow-lg border-l-4">
+              <h3 class="text-xl font-extrabold text-white mb-2 flex items-center">
+                <i data-lucide="user-check" class="w-5 h-5 mr-3 text-orange-bright"></i> Primary Contact
+              </h3>
+              <p class="text-text-secondary mt-3"><strong>Dr. Krishna Vedula</strong></p>
+              <p class="text-sm text-text-secondary">Founder & Executive Director, IUCEE</p>
+            </div>
+
+            <div class="info-card card-purple p-6 rounded-xl shadow-lg border-l-4">
+              <h3 class="text-xl font-extrabold text-white mb-2 flex items-center">
+                <i data-lucide="mail-check" class="w-5 h-5 mr-3 text-purple-bright"></i> For Inquiries
+              </h3>
+              <p class="text-text-secondary mt-3"><strong>Email:</strong> <a href="mailto:naveeenrom232@gmail.com" class="text-gold-bright hover:underline">naveeenrom232@gmail.com</a></p>
+              <p class="text-text-secondary"><strong>Website:</strong> <a href="https://iucee.org" target="_blank" class="text-gold-bright hover:underline">iucee.org</a></p>
+            </div>
+
+            <div class="info-card card-fuschia p-6 rounded-xl shadow-lg border-l-4">
+              <h3 class="text-xl font-extrabold text-white mb-2 flex items-center">
+                <i data-lucide="map-pin" class="w-5 h-5 mr-3 text-fuschia-bright"></i> Event Location
+              </h3>
+              <p class="text-text-secondary mt-3">Moinabad, Telangana, India</p>
+            </div>
+          </div>
+
+          <!-- Contact form -->
+          <div class="contact-form-container lg:col-span-2 p-8 rounded-xl shadow-2xl">
+            <h2 class="text-3xl font-bold mb-6 gradient-text border-b pb-3 border-border-dark">Send us a Message</h2>
+
+            <!-- === REPLACE THE ACTION BELOW WITH YOUR REAL FORMSPREE URL === -->
+            <!-- Example: https://formspree.io/f/abcd1234  -->
+            <form id="contact-form" class="space-y-6" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST" novalidate>
+              <div>
+                <label for="name" class="block text-sm font-medium mb-2 text-text-light">Full Name</label>
+                <input type="text" id="name" name="name" required class="form-input-field w-full p-3 rounded-lg" />
+              </div>
+
+              <div>
+                <label for="email" class="block text-sm font-medium mb-2 text-text-light">Email Address</label>
+                <input type="email" id="email" name="_replyto" required class="form-input-field w-full p-3 rounded-lg" />
+              </div>
+
+              <div>
+                <label for="message" class="block text-sm font-medium mb-2 text-text-light">Message</label>
+                <textarea id="message" name="message" rows="5" required class="form-input-field w-full p-3 rounded-lg"></textarea>
+              </div>
+
+              <div id="form-feedback" class="inline-error" aria-live="polite" style="display:none"></div>
+
+              <button id="submitBtn" type="submit" class="btn-primary w-full py-3 rounded-xl text-lg tracking-wider flex items-center justify-center">
+                <span id="btnText">Send Message</span>
+                <span id="btnSpinner" style="display:none;margin-left:0.75rem" class="spinner" aria-hidden="true"></span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer bg-bg-deep py-8 border-t-2 border-gold-dark mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-text-secondary text-sm font-medium">
+      <p>© IUCEE – EduAIthon 2026 | <a href="#" class="text-gold-bright hover:text-white">Contact</a> | <a href="#" class="text-gold-bright hover:text-white">Terms</a> | <a href="#" class="text-gold-bright hover:text-white">Privacy</a></p>
+    </div>
+  </footer>
+
+  <!-- Success modal -->
+  <div id="success-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div style="font-size:2rem;color:var(--gold-bright)">✅</div>
+      <div class="modal-title">Message Sent!</div>
+      <div class="modal-text">Thank you — your message was delivered. We'll get back to you soon.</div>
+      <button class="close-btn" onclick="document.getElementById('success-modal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <!-- Error modal -->
+  <div id="error-modal" role="alertdialog" aria-modal="true">
+    <div class="modal-box">
+      <div style="font-size:2rem;color:#ff8a8a">⚠</div>
+      <div id="error-title" class="modal-title" style="color:#ff8a8a">Submission Failed</div>
+      <div id="error-text" class="modal-text">Something went wrong. Please try again later.</div>
+      <button class="close-btn" onclick="document.getElementById('error-modal').style.display='none'">Close</button>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+    const feedback = document.getElementById('form-feedback');
+
+    // Helper: show a message in the inline feedback area
+    function showInlineFeedback(msg) {
+      feedback.style.display = 'block';
+      feedback.textContent = msg;
+    }
+    function clearInlineFeedback(){ feedback.style.display='none'; feedback.textContent=''; }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearInlineFeedback();
+
+      // Basic client-side validation
+      if (!form.checkValidity()) {
+        showInlineFeedback('Please fill all required fields correctly.');
+        return;
+      }
+
+      // Prepare UI loading state
+      submitBtn.disabled = true;
+      btnText.textContent = 'Sending...';
+      btnSpinner.style.display = 'inline-block';
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }, // request JSON response
+          mode: 'cors' // allow cross-origin requests
+        });
+
+        // 1) Success
+        if (response.ok) {
+          // show success modal
+          document.getElementById('success-modal').style.display = 'flex';
+          form.reset();
+          setTimeout(()=>{ document.getElementById('success-modal').style.display='none'; }, 3000);
+          clearInlineFeedback();
+          console.log('Form submitted: success (status ' + response.status + ')');
+          return;
+        }
+
+        // 2) Formspree returns 422 when validation fails (e.g., missing fields or honeypot)
+        if (response.status === 422) {
+          const payload = await response.json().catch(()=>null);
+          // Show server-provided errors if available
+          if (payload && payload.errors && payload.errors.length) {
+            showInlineFeedback(payload.errors.map(e=>e.message || e).join(' — '));
+            console.warn('Formspree validation errors:', payload.errors);
+          } else {
+            showInlineFeedback('Validation failed. Please check your inputs.');
+          }
+          console.warn('Formspree 422 response', payload);
+          return;
+        }
+
+        // 3) 404 / 410 -> likely "Form not found" (wrong form ID)
+        if (response.status === 404 || response.status === 410) {
+          // show clear message to the site owner / developer
+          const msg = 'Form not found — check your Formspree form id (action URL).';
+          document.getElementById('error-text').textContent = msg;
+          document.getElementById('error-modal').style.display = 'flex';
+          console.error('Formspree returned 404/410 — wrong form ID or form deleted.');
+          return;
+        }
+
+        // 4) Other non-OK responses
+        let text = await response.text().catch(()=>null);
+        document.getElementById('error-text').textContent = 'Server error: ' + (response.status + ' ' + response.statusText) + (text ? ' — ' + text : '');
+        document.getElementById('error-modal').style.display = 'flex';
+        console.error('Submit error', response.status, response.statusText, text);
+
+      } catch (err) {
+        // Network or CORS error
+        document.getElementById('error-text').textContent = 'Network error: ' + (err && err.message ? err.message : 'Unknown error');
+        document.getElementById('error-modal').style.display = 'flex';
+        console.error('Network/CORS error during form submit:', err);
+      } finally {
+        // Reset UI
+        submitBtn.disabled = false;
+        btnText.textContent = 'Send Message';
+        btnSpinner.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>

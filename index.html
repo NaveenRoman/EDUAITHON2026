@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home — EduAIthon 2026 @ IASF</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="https://ictiee.org/ictiee2026/wp-content/uploads/2023/02/favicon-2.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+
+    <style>
+        /* Custom styles to integrate with Tailwind and provide necessary non-utility styling */
+        :root {
+            /* GOLD/GREEN Palette */
+            --primary-color: #FFD700;
+            /* Gold */
+            --secondary-color: #008000;
+            /* Green (Darker) */
+            --accent-color: #38A169;
+            /* Medium Emerald/Jungle Green for CTA/Highlight */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            /* WHITE BACKGROUND */
+            color: #1a202c;
+            /* Dark text for contrast */
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Gradient Text: Applies to titles - NOW USING GOLD/GREEN TONES */
+        .gradient-text {
+            /* Green to Gold Gradient */
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* High-Impact CTA Glow updated for GREEN on a light background */
+        .btn.primary {
+            /* Shadow adjusted to look good on white - Using Accent Color */
+            box-shadow: 0 4px 15px rgba(56, 161, 105, 0.4);
+            /* Green Shadow */
+        }
+
+        .btn.primary:hover {
+            box-shadow: 0 4px 20px rgba(56, 161, 105, 0.6);
+        }
+
+        /* --- Header & Nav --- */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            /* White, slightly transparent header */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for white header */
+            backdrop-filter: blur(5px);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        /* Marquee styles (UPDATED FOR SLOWER SCROLL) */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background-color: var(--secondary-color);
+            /* Deep Green */
+            white-space: nowrap;
+            padding: 8px 0;
+            border-bottom: 3px solid var(--accent-color);
+            /* Solid Green border */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            /* DURATION IS SET TO 40s FOR SLOWER SCROLL */
+            animation: marquee 40s linear infinite;
+            color: white;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        .nav-links {
+            transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        /* Mobile Menu Toggle Styles */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            position: relative;
+            z-index: 60;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background: var(--secondary-color);
+            /* Darker green for visibility on white */
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: rgba(255, 255, 255, 0.98);
+                padding: 10px 0;
+                border-top: 1px solid #e5e7eb;
+                /* Light border */
+                max-height: 0;
+                overflow: hidden;
+                opacity: 0;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-links.active {
+                max-height: 300px;
+                opacity: 1;
+            }
+
+            .nav-links li {
+                width: 100%;
+                text-align: center;
+                padding: 8px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-links li:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* --- Hero & Vanta --- */
+        #hero {
+            position: relative;
+            height: 70vh;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .hero-content {
+            z-index: 20;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 1rem;
+        }
+
+        /* --- Scroll Animations --- */
+        .section-wrapper {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .section-wrapper.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .card,
+        .theme-card,
+        .testimonial-card,
+        .time-box,
+        .partner-card,
+        .schedule-box,
+        .sponsor-card {
+            opacity: 0;
+            transform: translateY(15px);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .card.card-animate-in,
+        .theme-card.card-animate-in,
+        .testimonial-card.card-animate-in,
+        .time-box.card-animate-in,
+        .partner-card.card-animate-in,
+        .schedule-box.card-animate-in,
+        .sponsor-card.card-animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- Carousel Card Styles --- */
+        .carousel-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Define a simple fade-in/fade-out animation for the transition */
+        .fade-out {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.7s ease-in, transform 0.7s ease-in;
+        }
+
+        /* --- Chatbot Styles --- */
+        #chat-icon-container {
+            z-index: 100;
+        }
+
+        #chat-window {
+            z-index: 99;
+            transform: scale(0.8);
+            /* Start smaller */
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+            transform-origin: bottom right;
+        }
+
+        #chat-window.open {
+            transform: scale(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .chat-message {
+            max-width: 85%;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.75rem;
+            margin-bottom: 0.5rem;
+            word-wrap: break-word;
+        }
+
+        .user-message {
+            background-color: var(--accent-color);
+            /* Green Accent */
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+        }
+
+        .bot-message {
+            background-color: #f3f4f6;
+            /* Light gray */
+            color: #1f2937;
+            /* Dark text */
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+        }
+
+        /* Sponsor Section Overrides */
+        .sponsor-image {
+            transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+
+        .sponsor-card.active .sponsor-image {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
+        .info-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .sponsor-card.active .info-panel {
+            max-height: 150px;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        .tap-prompt {
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .sponsor-card.active .tap-prompt {
+            opacity: 0;
+        }
+
+        /* --- Modal Styles --- */
+        #themeModal {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease-out;
+        }
+
+        #themeModal.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #themeModal>div {
+            transform: scale(0.95);
+            transition: transform 0.3s ease-out;
+        }
+
+        #themeModal.open>div {
+            transform: scale(1);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="logo-group flex-shrink-0 flex items-center gap-2">
+                    <img src="https://ictiee.org/ictiee2026/wp-content/uploads/2025/04/ICTIEE-2026.png"
+                        alt="ICTIEE 2026 Logo" class="logo h-8 sm:h-10 w-auto">
+                    <img src="https://ictiee.org/ictiee2026/wp-content/uploads/2023/02/IUCEE-Foundation.jpg"
+                        alt="IUCEE Logo" class="logo h-8 sm:h-10 w-auto"
+                        onerror="this.onerror=null; this.src='https:placehold.co/150x50/002244/FFF?text=IUCEE+Logo';">
+                </div>
+
+                <div class="brand">
+                    <a class="gradient-text text-xl sm:text-2xl font-extrabold tracking-tight" href="index.html">
+                        <strong>EduAIthon</strong>
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-2 sm:gap-4">
+                <ul class="nav-links flex space-x-6 text-sm font-bold" id="navLinks">
+                    <li><a href="index.html"
+                            class="text-gray-800 hover:text-[#38A169] transition duration-150 border-b-2 border-[#FFD700] pb-1">Home</a>
+                    </li>
+                    <li><a href="about.html"
+                            class="text-gray-600 hover:text-[#38A169] transition duration-150">About</a></li>
+                    <li><a href="event.html"
+                            class="text-gray-600 hover:text-[#38A169] transition duration-150">Event</a></li>
+                    <li><a href="registration.html"
+                            class="text-gray-600 hover:text-[#38A169] transition duration-150">Registration</a></li>
+                    <li><a href="help.html" class="text-gray-600 hover:text-[#38A169] transition duration-150">Help
+                            Desk</a></li>
+                    
+                    <li><a href="faq.html" class="text-gray-600 hover:text-[#38A169] transition duration-150">FAQ</a>
+                    </li>
+                    
+                </ul>
+
+                <div style="display: none;"> 
+
+                    <button id="themeToggle"
+                        class="theme-toggle p-1 rounded-full text-gray-600 hover:text-[#38A169] focus:outline-none focus:ring-2 focus:ring-green-400"
+                        aria-label="Switch to dark theme">
+                        <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                        <svg id="iconSun" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            style="display: none;">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="menu-toggle" id="menuToggle"> <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="marquee-container">
+        <div class="marquee-content px-4">
+            <span class="mr-16">
+                🔥 REGISTRATION FEE: ₹1000 + GST. SECURE YOUR SPOT NOW!
+            </span>
+            <span class="mr-16 text-[#FFD700]">
+                📢 LIMITED SEATS AVAILABLE! REGISTER TODAY!
+            </span>
+            <span class="mr-16">
+                🔥 REGISTRATION FEE: ₹1000 + GST. SECURE YOUR SPOT NOW!
+            </span>
+            <span class="mr-16 text-[#FFD700]">
+                📢 LIMITED SEATS AVAILABLE! REGISTER TODAY!
+            </span>
+            <span class="mr-16">
+                🔥 REGISTRATION FEE: ₹1000 + GST. SECURE YOUR SPOT NOW!
+            </span>
+            <span class="mr-16 text-[#FFD700]">
+                📢 LIMITED SEATS AVAILABLE! REGISTER TODAY!
+            </span>
+        </div>
+    </div>
+
+    <section id="hero" class="hero bg-white">
+        <div class="hero-content container max-w-7xl mx-auto flex flex-col items-center justify-center text-center">
+            <h1 class="gradient-text text-5xl sm:text-7xl lg:text-8xl font-black mb-4 tracking-tighter drop-shadow-lg">
+                EduAIthon 2026 @ IASF
+            </h1>
+            <p class="tagline text-xl sm:text-2xl text-gray-700 mb-10 max-w-3xl">
+                Co-Creating Sustainable Futures in Engineering Education with AI
+            </p>
+            <div class="cta-buttons flex space-x-4 sm:space-x-6 justify-center flex-wrap gap-4">
+                <a class="btn primary bg-[#38A169] hover:bg-[#2F855A] text-white font-black py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 uppercase tracking-wider"
+                    href="registration.html">
+                    Pre-Register Now
+                </a>
+                <a class="btn outline border-2 border-[#38A169] text-[#38A169] hover:bg-[#38A169] hover:text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105 uppercase tracking-wider"
+                    href="event.html">
+                    Know More
+                </a>
+            </div>
+        </div>
+
+
+    </section>
+
+    <div
+        class="max-w-xl mx-auto p-4 bg-green-100 text-green-800 rounded-xl shadow-inner border-l-4 border-green-500 font-semibold mt-4">
+        <p class="text-sm sm:text-base">
+            ⚠ <b>PRE-REGISTRATION ONLY:</b> This is a screening phase. Only selected teams will be formally notified.
+            The fee is non-refundable.
+        </p>
+    </div>
+
+    <div class="section-wrapper py-16 border-b border-gray-200">
+        <section class="countdown container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="gradient-text text-4xl font-extrabold mb-10">Countdown to Pre-Registration!</h2>
+            <div id="timer" class="timer-grid grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+                aria-live="polite">
+                <div
+                    class="time-box bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-[#38A169] hover:border-b-4 hover:border-[#FFD700] transition duration-300">
+                    <span id="days" class="text-6xl font-black text-[#38A169] block mb-2">00</span>
+                    <p class="text-lg text-gray-600 uppercase tracking-wider">Days</p>
+                </div>
+                <div
+                    class="time-box bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-[#38A169] hover:border-b-4 hover:border-[#FFD700] transition duration-300">
+                    <span id="hours" class="text-6xl font-black text-[#38A169] block mb-2">00</span>
+                    <p class="text-lg text-gray-600 uppercase tracking-wider">Hours</p>
+                </div>
+                <div
+                    class="time-box bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-[#38A169] hover:border-b-4 hover:border-[#FFD700] transition duration-300">
+                    <span id="minutes" class="text-6xl font-black text-[#38A169] block mb-2">00</span>
+                    <p class="text-lg text-gray-600 uppercase tracking-wider">Minutes</p>
+                </div>
+                <div
+                    class="time-box bg-gray-50 p-6 rounded-xl shadow-lg border-b-4 border-[#38A169] hover:border-b-4 hover:border-[#FFD700] transition duration-300">
+                    <span id="seconds" class="text-6xl font-black text-[#38A169] block mb-2">00</span>
+                    <p class="text-lg text-gray-600 uppercase tracking-wider">Seconds</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="section-wrapper alt-bg bg-gray-50 py-20">
+        <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div
+                class="p-8 md:p-12 bg-white rounded-2xl shadow-2xl transition duration-500 hover:shadow-2xl hover:shadow-[#7B2CBF]/30 border-t-8 border-[#7B2CBF]">
+                <h2 class="text-4xl sm:text-5xl font-extrabold mb-4 reg-gradient-text">
+                    Important Registration Update
+                </h2>
+                <p class="text-xl sm:text-2xl font-semibold text-gray-800 mb-6">
+                    Current Status: Pre-registration Only
+                </p>
+                <div class="space-y-4 text-left mx-auto max-w-xl">
+                    <div class="flex items-start">
+                        <span class="text-2xl text-[#7B2CBF] mr-3 font-bold flex-shrink-0">🚀</span>
+                        <p class="text-lg text-gray-700">
+                            Thank you for your overwhelming interest! At this time, we are only accepting
+                            Pre-registrations to gauge participation and team capability.
+                        </p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-2xl text-[#7B2CBF] mr-3 font-bold flex-shrink-0">📧</span>
+                        <p class="text-lg text-gray-700">
+                            Selected teams will be notified shortly via email with the final acceptance letter and
+                            instructions on completing the full registration process.
+                        </p>
+                    </div>
+                    <div class="mt-8">
+                        <a class="btn primary bg-[#7B2CBF] hover:bg-[#6a24aa] text-white font-black py-3 px-8 rounded-full transition duration-300 transform hover:scale-105 uppercase tracking-wider inline-block mt-4"
+                            href="https://forms.gle/YjRzySwim5K8AXfW7">
+                            Proceed to Pre-Register
+                        </a>
+                    </div>
+                </div>
+            </div><br>
+
+            <div class="section-wrapper alt-bg bg-white py-20 border-b border-gray-200">
+                <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-2 gap-12 items-center">
+                    <div class="column-text">
+                        <h2 class="gradient-text text-4xl font-extrabold mb-6">Why Participate in EduAIthon 2026?</h2>
+                        <p class="text-gray-700 mb-8 text-lg">This is more than just a competition; it's a launchpad for
+                            your
+                            career. Collaborate with the brightest minds, learn from industry experts, and build
+                            solutions that
+                            can reshape the future of education.</p>
+                        <ul class="benefits-list space-y-4">
+                            <li class="flex items-start text-gray-700">
+                                <span class="text-[#38A169] font-black text-xl mr-3 mt-1">✓</span>
+                                <span>Gain hands-on experience with AI, AR/VR, and digital twins.</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <span class="text-[#38A169] font-black text-xl mr-3 mt-1">✓</span>
+                                <span>Enhance your problem-solving and design thinking skills.</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <span class="text-[#38A169] font-black text-xl mr-3 mt-1">✓</span>
+                                <span>Network with innovators, researchers, and global educators.</span>
+                            </li>
+                            <li class="flex items-start text-gray-700">
+                                <span class="text-[#38A169] font-black text-xl mr-3 mt-1">✓</span>
+                                <span>Win exciting prizes and gain international recognition at IASF.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="column-image order-first md:order-last">
+                        <img src="Assets/logo.jpeg.jpg"
+                            onerror="this.onerror=null; this.src='https://placehold.co/600x400/008000/FFFFFF?text=Innovation+|+Education';"
+                            alt="Students collaborating on a tech project"
+                            class="w-full h-auto rounded-xl shadow-xl transition duration-500 hover:shadow-[#38A169]/30">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-wrapper py-20 border-b border-gray-200">
+                <section class="features container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="section-header text-center mb-12">
+                        <h2 class="gradient-text text-4xl font-extrabold mb-3">Event Highlights</h2>
+                        <p class="text-gray-700 text-lg">What to expect from the 36-Hour Innovation Marathon. Click a
+                            card to
+                            learn more.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+                        <div class="card event-highlight-card bg-gray-50 p-8 rounded-xl shadow-lg transition duration-300 hover:shadow-[#FFD700]/50 hover:scale-[1.02] border border-transparent hover:border-[#FFD700]/50 cursor-pointer"
+                            onclick="toggleHighlight(this)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="gradient-text text-xl font-bold">36-Hour AI Innovation Marathon</h3>
+                                <span
+                                    class="highlight-icon text-[#38A169] text-2xl font-black transition-transform duration-500 transform">+</span>
+                            </div>
+                            <div
+                                class="highlight-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <p class="text-gray-600 pt-3">Intensive hands-on sprint to build impactful educational
+                                    solutions
+                                    focused on real-world engineering challenges.</p>
+                            </div>
+                        </div>
+
+                        <div class="card event-highlight-card bg-gray-50 p-8 rounded-xl shadow-lg transition duration-300 hover:shadow-[#FFD700]/50 hover:scale-[1.02] border border-transparent hover:border-[#FFD700]/50 cursor-pointer"
+                            onclick="toggleHighlight(this)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="gradient-text text-xl font-bold">Team Collaboration</h3>
+                                <span
+                                    class="highlight-icon text-[#38A169] text-2xl font-black transition-transform duration-500 transform">+</span>
+                            </div>
+                            <div
+                                class="highlight-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <p class="text-gray-600 pt-3">Work in interdisciplinary teams supported by experienced
+                                    faculty
+                                    mentors and guidance from industry leaders.</p>
+                            </div>
+                        </div>
+
+                        <div class="card event-highlight-card bg-gray-50 p-8 rounded-xl shadow-lg transition duration-300 hover:shadow-[#FFD700]/50 hover:scale-[1.02] border border-transparent hover:border-[#FFD700]/50 cursor-pointer"
+                            onclick="toggleHighlight(this)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="gradient-text text-xl font-bold">Workshops</h3>
+                                <span
+                                    class="highlight-icon text-[#38A169] text-2xl font-black transition-transform duration-500 transform">+</span>
+                            </div>
+                            <div
+                                class="highlight-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <p class="text-gray-600 pt-3">Attend pre-event sessions on crucial topics like prompt
+                                    engineering, design thinking, AR/VR, and digital twin simulation tools.</p>
+                            </div>
+                        </div>
+
+                        <div class="card event-highlight-card bg-gray-50 p-8 rounded-xl shadow-lg transition duration-300 hover:shadow-[#FFD700]/50 hover:scale-[1.02] border border-transparent hover:border-[#FFD700]/50 cursor-pointer"
+                            onclick="toggleHighlight(this)">
+                            <div class="flex justify-between items-center">
+                                <h3 class="gradient-text text-xl font-bold">Exciting Prizes</h3>
+                                <span
+                                    class="highlight-icon text-[#38A169] text-2xl font-black transition-transform duration-500 transform">+</span>
+                            </div>
+                            <div
+                                class="highlight-content max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                                <p class="text-gray-600 pt-3">A significant prize pool, plus recognition, certificates,
+                                    and
+                                    opportunities to showcase winning solutions at the main IASF event.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+            </div>
+
+            <div class="section-wrapper alt-bg bg-white py-20 border-b border-gray-200">
+                <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="section-header text-center mb-12">
+                        <h2 class="gradient-text text-4xl font-extrabold mb-3">Theme</h2>
+                        <p class="text-gray-700 text-lg">Focus your innovation on today's most exciting challenges.</p>
+                    </div>
+                    <div class="flex justify-center">
+                        <div id="themeCard"
+                            class="theme-card bg-green-100 text-gray-800 p-6 rounded-xl text-center shadow-md transition duration-300 hover:bg-green-200 transform hover:-translate-y-1 border border-green-300 cursor-pointer max-w-lg">
+                            <h3 class="text-lg font-extrabold text-green-700">“Empowering Self-Learning through AI"</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 md:p-8" style="font-family: 'Inter', sans-serif; background-color: #f7f9fb;">
+                <style>
+                    /* Gradient for main title */
+                    .sponsor-gradient-text {
+                        /* Renamed to avoid conflict */
+                        background-image: linear-gradient(to right, #7B2CBF, #9D4EDD, #C77DFF);
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        color: transparent;
+                    }
+            
+                    .sponsor-image {
+                        transition: filter 0.3s ease-in-out, opacity 0.3s ease-in-out;
+                    }
+            
+                    .sponsor-card.active .sponsor-image {
+                        filter: grayscale(0%);
+                        opacity: 1;
+                    }
+            
+                    .info-panel {
+                        max-height: 0;
+                        overflow: hidden;
+                        transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+                        padding-top: 0;
+                        padding-bottom: 0;
+                    }
+            
+                    .sponsor-card.active .info-panel {
+                        max-height: 150px;
+                        padding-top: 0.5rem;
+                        padding-bottom: 0.5rem;
+                    }
+            
+                    .tap-prompt {
+                        transition: opacity 0.3s ease-in-out;
+                    }
+            
+                    .sponsor-card.active .tap-prompt {
+                        opacity: 0;
+                    }
+                </style>
+            
+                <div class="section-wrapper py-12 md:py-20">
+                    <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="section-header text-center mb-12">
+                            <h2 class="sponsor-gradient-text text-4xl md:text-5xl font-extrabold mb-3">Our Valued Partners
+                            </h2>
+                            <p class="text-gray-700 text-lg">Leading organizations powering innovation in education and
+                                technology.</p>
+                        </div>
+            
+                        <div class="flex flex-col items-center space-y-8">
+                            <div class="w-full max-w-md">
+                                <h3
+                                    class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
+                                    Quality Partner
+                                </h3>
+                                <div id="sponsor-quality-0"
+                                    class="sponsor-card bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200 cursor-pointer relative overflow-hidden flex flex-col items-center justify-between min-h-[200px] w-full group"
+                                    onclick="toggleSponsorInfo(this)">
+                                    <img src="Assets/ABET.png" alt="ABET Logo"
+                                        class="sponsor-image w-auto h-24 sm:h-28 mx-auto object-contain max-w-full">
+                                    <p
+                                        class="tap-prompt text-gray-500 text-xs mt-3 transition-opacity group-[.active]:opacity-0">
+                                        Tap to Reveal Info</p>
+                                    <div
+                                        class="info-panel absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-4 text-center">
+                                        <h4 class="text-base font-bold text-gray-800 mb-1">ABET</h4>
+                                        <p class="text-xs text-gray-600">The global standard for quality assurance in
+                                            <strong>STEM education</strong>.
+                                        </p>
+                                        <a href="#" class="text-[#7B2CBF] text-xs font-semibold mt-1 inline-block">Visit
+                                            Website</a>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="w-full max-w-md">
+                                <h3
+                                    class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
+                                    Platinum Sponsor
+                                </h3>
+                                <div id="sponsor-platinum-0"
+                                    class="sponsor-card bg-white p-6 rounded-xl shadow-xl border-4 border-[#7B2CBF] cursor-pointer relative overflow-hidden flex flex-col items-center justify-between min-h-[200px] w-full group"
+                                    onclick="toggleSponsorInfo(this)">
+                                    <img src="Assets/dslogo.png" alt="Dassault Systèmes Logo"
+                                        class="sponsor-image w-auto h-24 sm:h-28 mx-auto object-contain max-w-full">
+                                    <p
+                                        class="tap-prompt text-gray-500 text-xs mt-3 transition-opacity group-[.active]:opacity-0">
+                                        Tap to Reveal Info</p>
+                                    <div
+                                        class="info-panel absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-4 text-center">
+                                        <h4 class="text-base font-bold text-gray-800 mb-1">Dassault Systèmes</h4>
+                                        <p class="text-xs text-gray-600">Global leader in
+                                            <strong>3DEXPERIENCE</strong> platforms, supporting design innovation.
+                                        </p>
+                                        <a href="#" class="text-[#7B2CBF] text-xs font-semibold mt-1 inline-block">Visit
+                                            Website</a>
+                                    </div>
+                                </div>
+                            </div>
+            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-2xl">
+                                <div>
+                                    <h3
+                                        class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
+                                        Bronze Sponsor
+                                    </h3>
+                                    <div id="sponsor-bronze-0"
+                                        class="sponsor-card bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200 cursor-pointer relative overflow-hidden flex flex-col items-center justify-between min-h-[200px] w-full group"
+                                        onclick="toggleSponsorInfo(this)">
+                                        <img src="Assets/IAOE.png" alt="IAOE Logo"
+                                            class="sponsor-image w-auto h-24 sm:h-28 mx-auto object-contain max-w-full">
+                                        <p
+                                            class="tap-prompt text-gray-500 text-xs mt-3 transition-opacity group-[.active]:opacity-0">
+                                            Tap to Reveal Info</p>
+                                        <div
+                                            class="info-panel absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-4 text-center">
+                                            <h4 class="text-base font-bold text-gray-800 mb-1">IAOE</h4>
+                                            <p class="text-xs text-gray-600">International Association of
+                                                <strong>Online Engineering</strong>.
+                                            </p>
+                                            <a href="#"
+                                                class="text-[#7B2CBF] text-xs font-semibold mt-1 inline-block">Visit
+                                                Website</a>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <div>
+                                    <h3
+                                        class="text-2xl font-extrabold text-center mb-6 text-[#5A189A] uppercase tracking-wider border-b-2 border-[#9D4EDD] pb-2">
+                                        Institutional Sponsor
+                                    </h3>
+                                    <div id="sponsor-inst-0"
+                                        class="sponsor-card bg-white p-6 rounded-xl shadow-lg border-2 border-purple-200 cursor-pointer relative overflow-hidden flex flex-col items-center justify-between min-h-[200px] w-full group"
+                                        onclick="toggleSponsorInfo(this)">
+                                        <img src="Assets/ctilogo.webp" alt="CTI Global Logo"
+                                            class="sponsor-image w-auto h-24 sm:h-28 mx-auto object-contain max-w-full">
+                                        <p
+                                            class="tap-prompt text-gray-500 text-xs mt-3 transition-opacity group-[.active]:opacity-0">
+                                            Tap to Reveal Info</p>
+                                        <div
+                                            class="info-panel absolute bottom-0 left-0 right-0 bg-white bg-opacity-95 p-4 text-center">
+                                            <h4 class="text-base font-bold text-gray-800 mb-1">CTI Global</h4>
+                                            <p class="text-xs text-gray-600">Specializing in <strong>IT training and
+                                                    certification</strong>.</p>
+                                            <a href="#"
+                                                class="text-[#7B2CBF] text-xs font-semibold mt-1 inline-block">Visit
+                                                Website</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-wrapper py-20 bg-gradient-to-b from-gray-50 to-white">
+                <div class="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+                    <div class="mb-10">
+                        <h2 class="gradient-text text-4xl font-extrabold mb-3">Participant Success Stories</h2>
+                        <p class="text-gray-600 text-lg">Hear directly from our inspiring participants in their own
+                            words.</p>
+                    </div>
+
+                    <div id="video-container"
+                        class="relative bg-white shadow-2xl rounded-2xl border border-[#9D4EDD]/30 overflow-hidden transition-transform duration-500 hover:scale-[1.01]">
+
+                        <video id="main-video" class="w-full h-auto md:h-[480px] object-cover rounded-2xl" controls
+                            playsinline autoplay muted loop>
+                            <source src="Videos/v1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+
+                        <div
+                            class="absolute inset-0 rounded-2xl pointer-events-none border-4 border-transparent bg-gradient-to-r from-[#7B2CBF] via-[#9D4EDD] to-[#C77DFF] bg-clip-border opacity-40">
+                        </div>
+
+                        <button id="sound-btn" onclick="toggleSound()"
+                            class="absolute bottom-4 right-4 bg-white/80 backdrop-blur-md p-3 rounded-full shadow-lg hover:scale-110 transition"
+                            title="Toggle Sound">
+                            <svg id="sound-on" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#9D4EDD] hidden"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5L6 9H3v6h3l5 4V5zM19 12a4 4 0 00-4-4v8a4 4 0 004-4z" />
+                            </svg>
+                            <svg id="sound-off" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#9D4EDD]"
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 9l6 6M15 9l-6 6M11 5L6 9H3v6h3l5 4V5z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="flex justify-center mt-8 space-x-3">
+                        <button id="dot1"
+                            class="w-3.5 h-3.5 rounded-full bg-[#9D4EDD] transition-all duration-300 scale-110 shadow-md"
+                            onclick="switchVideo(1)"></button>
+                        <button id="dot2"
+                            class="w-3.5 h-3.5 rounded-full bg-[#D0B0FF] hover:bg-[#9D4EDD] transition-all duration-300"
+                            onclick="switchVideo(2)"></button>
+                    </div>
+
+                </div>
+            </div>
+
+            <script>
+                const videos = [
+                    "Videos/v1.mp4",
+                    "Videos/v2.mp4"
+                ];
+                const video = document.getElementById("main-video");
+                const soundOn = document.getElementById("sound-on");
+                const soundOff = document.getElementById("sound-off");
+
+                // Set initial icon state based on video muted property
+                if (video.muted) {
+                    soundOn.classList.add("hidden");
+                    soundOff.classList.remove("hidden");
+                } else {
+                    soundOff.classList.add("hidden");
+                    soundOn.classList.remove("hidden");
+                }
+
+
+                function switchVideo(index) {
+                    const dot1 = document.getElementById("dot1");
+                    const dot2 = document.getElementById("dot2");
+
+                    video.src = videos[index - 1];
+                    video.load();
+                    video.play(); // Attempt to play after loading new source
+
+                    if (index === 1) {
+                        dot1.classList.add("bg-[#9D4EDD]", "scale-110", "shadow-md");
+                        dot2.classList.remove("bg-[#9D4EDD]", "scale-110", "shadow-md");
+                        dot2.classList.add("bg-[#D0B0FF]");
+                    } else {
+                        dot2.classList.add("bg-[#9D4EDD]", "scale-110", "shadow-md");
+                        dot1.classList.remove("bg-[#9D4EDD]", "scale-110", "shadow-md");
+                        dot1.classList.add("bg-[#D0B0FF]");
+                    }
+                }
+
+                // Toggle sound on/off
+                function toggleSound() {
+                    video.muted = !video.muted;
+                    if (video.muted) {
+                        soundOn.classList.add("hidden");
+                        soundOff.classList.remove("hidden");
+                    } else {
+                        soundOff.classList.add("hidden");
+                        soundOn.classList.remove("hidden");
+                    }
+                }
+            </script>
+
+            <style>
+                .video-gradient-text {
+                    /* Renamed to avoid conflict */
+                    background-image: linear-gradient(to right, #7B2CBF, #9D4EDD, #C77DFF);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+            </style>
+
+
+            <style>
+                .reg-gradient-text {
+                    /* Renamed to avoid conflict */
+                    background-image: linear-gradient(to right, #7B2CBF, #9D4EDD, #C77DFF);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                }
+            </style>
+
+        </div>
+    </div>
+
+
+    <footer class="bg-[#008000] text-white py-12">
+        <div class="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="col-span-2 md:col-span-1">
+                    <h3 class="text-2xl font-extrabold text-[#FFD700] mb-4">EduAIthon</h3>
+                    <p class="text-sm text-gray-200 mb-2">Hosted by the IUCEE Foundation in collaboration with:
+                    </p>
+                    <address class="text-sm text-gray-200 not-italic">
+                        GITAM University,Bangalore.<br>
+                        as part of ICTIEE 2026 -<br>Transforming Teaching and Learning Ecosystems in
+                        the AI-Driven World
+
+                    </address>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-white border-b border-[#38A169] pb-2 mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="about.html"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">About the Event</a>
+                        </li>
+                        <li><a href="event.html"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">Event Schedule</a>
+                        </li>
+                        <li><a href="registration.html"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">Registration Info</a>
+                        </li>
+                        <li><a href="faq.html"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-white border-b border-[#38A169] pb-2 mb-4">Get in Touch</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>Contact: <b>Dr. Krishna Vedula</b>, Founder & Executive Director, IUCEE</li>
+                        <li>Email: <a href="mailto:contact@edu-aithon.iasf"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">contact@edu-aithon.iasf</a>
+                        </li>
+                        <li><a href="help.html"
+                                class="text-gray-200 hover:text-[#FFD700] transition duration-150">Support / Help
+                                Desk</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-bold text-white border-b border-[#38A169] pb-2 mb-4">Connect</h3>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="text-gray-200 hover:text-[#FFD700] transition duration-150"
+                            aria-label="LinkedIn">
+                            <span class="font-extrabold">L</span>
+                        </a>
+                        <a href="#" class="text-gray-200 hover:text-[#FFD700] transition duration-150"
+                            aria-label="Twitter/X">
+                            <span class="font-extrabold">X</span>
+                        </a>
+                        <a href="#" class="text-gray-200 hover:text-[#FFD700] transition duration-150"
+                            aria-label="Instagram">
+                            <span class="font-extrabold">I</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-8 border-t border-[#38A169] text-center">
+                <p class="text-sm text-gray-300">&copy; 2026 EduAIthon @ IASF. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="themeModal"
+        class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center p-4 z-[100] hidden"
+        onclick="closeThemeModal()">
+        <div class="bg-white p-8 rounded-2xl shadow-2xl max-w-2xl w-full relative" onclick="event.stopPropagation()">
+            <button onclick="closeThemeModal()"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-700 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h2 class="gradient-text text-2xl font-extrabold mb-4">Building Personalized Learning Tools for Higher
+                Education</h2>
+            <p class="text-gray-700 mb-4">
+                This unique hackathon invites faculty–student teams from higher-education institutions across India to
+                design and prototype AI-enabled self-learning modules that help students learn specific chapters of a
+                course independently.
+            </p>
+            <p class="text-gray-700">
+                Teams will leverage freely available AI tools to create innovative, adaptive, and
+                engaging learning experiences.
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        // --- 1. VANTA.JS GLOBE BACKGROUND ---
+        // Initialize the Vanta Globe effect on the hero section
+        const heroElement = document.getElementById('hero');
+        if (heroElement) {
+            VANTA.GLOBE({
+                el: "#hero",
+                mouseControls: true,
+                touchControls: true,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                color: 0x38A169, // Accent Green
+                color2: 0xFFD700, // Gold
+                backgroundColor: 0xffffff,
+                size: 0.90
+            });
+        }
+
+        // --- 2. MOBILE NAVIGATION TOGGLE ---
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        });
+
+
+        // --- 3. COUNTDOWN TIMER ---
+        const eventDate = new Date("Nov 15, 2025 09:00:00").getTime();
+
+        const countdown = setInterval(function () {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            // Calculations for days, hours, minutes and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in elements
+            document.getElementById("days").innerHTML = days < 0 ? "00" : days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours < 0 ? "00" : hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes < 0 ? "00" : minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds < 0 ? "00" : seconds.toString().padStart(2, '0');
+
+            // If the countdown is finished, write some text and stop the timer
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("timer").innerHTML = `
+                    <div class="col-span-4 p-8 bg-[#38A169] text-white rounded-xl shadow-2xl">
+                        <span class="text-3xl font-black block mb-2">THE HACKATHON IS LIVE!</span>
+                        <p class="text-lg">Good luck to all participants!</p>
+                    </div>
+                `;
+            }
+        }, 1000);
+
+        // --- 4. SCROLL ANIMATIONS (Intersection Observer) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1 // Trigger when 10% of the element is visible
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        // Stop observing after animation is applied
+                        sectionObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const cardObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        // Apply a slight delay to cards for staggered effect
+                        setTimeout(() => {
+                            entry.target.classList.add('card-animate-in');
+                            cardObserver.unobserve(entry.target);
+                        }, index * 100);
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.2
+            });
+
+
+            // Observe all section wrappers
+            document.querySelectorAll('.section-wrapper').forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Observe all card-like elements
+            document.querySelectorAll('.time-box, .theme-card, .card, .sponsor-card, .partner-card').forEach(card => {
+                cardObserver.observe(card);
+            });
+        });
+
+
+        // --- 5. EVENT HIGHLIGHT CARD TOGGLE ---
+        window.toggleHighlight = function (element) {
+            const content = element.querySelector('.highlight-content');
+            const icon = element.querySelector('.highlight-icon');
+
+            if (content.classList.contains('active')) {
+                // Collapse
+                content.classList.remove('active');
+                content.style.maxHeight = '0';
+                content.classList.add('opacity-0');
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                // Expand
+                // Close any currently open card first (optional, but cleaner UX)
+                document.querySelectorAll('.highlight-content.active').forEach(openContent => {
+                    openContent.classList.remove('active');
+                    openContent.style.maxHeight = '0';
+                    openContent.classList.add('opacity-0');
+                    openContent.closest('.event-highlight-card').querySelector('.highlight-icon').style.transform = 'rotate(0deg)';
+                });
+
+                content.classList.add('active');
+                // Set max height high enough to contain content, then remove opacity
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.remove('opacity-0');
+                icon.style.transform = 'rotate(45deg)';
+            }
+        }
+
+
+        // --- 6. SPONSOR CARD INFO TOGGLE ---
+        window.toggleSponsorInfo = function (element) {
+            // Close any currently active card
+            document.querySelectorAll('.sponsor-card.active').forEach(activeCard => {
+                if (activeCard !== element) {
+                    activeCard.classList.remove('active');
+                    const otherInfoPanel = activeCard.querySelector('.info-panel');
+                    if (otherInfoPanel) otherInfoPanel.style.maxHeight = '0';
+                }
+            });
+
+            // Toggle the clicked card
+            element.classList.toggle('active');
+
+            const infoPanel = element.querySelector('.info-panel');
+            if (element.classList.contains('active')) {
+                // Set the max-height based on scrollHeight for smooth transition
+                if (infoPanel) infoPanel.style.maxHeight = infoPanel.scrollHeight + 'px';
+            } else {
+                if (infoPanel) infoPanel.style.maxHeight = '0';
+            }
+        }
+
+        // --- 7. THEME MODAL ---
+        const themeCard = document.getElementById('themeCard');
+        const themeModal = document.getElementById('themeModal');
+
+        function openThemeModal() {
+            if (themeModal) {
+                themeModal.classList.remove('hidden');
+                // Force a reflow to allow transition
+                void themeModal.offsetWidth;
+                themeModal.classList.add('open');
+            }
+        }
+
+        function closeThemeModal() {
+            if (themeModal) {
+                themeModal.classList.remove('open');
+                // Wait for the transition to finish before hiding
+                setTimeout(() => {
+                    themeModal.classList.add('hidden');
+                }, 300); // Match transition duration
+            }
+        }
+
+        if (themeCard) {
+            themeCard.addEventListener('click', openThemeModal);
+        }
+
+        // Close modal on Escape key press
+        window.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape' && themeModal && themeModal.classList.contains('open')) {
+                closeThemeModal();
+            }
+        });
+    </script>
+</body>
+
+</html>
